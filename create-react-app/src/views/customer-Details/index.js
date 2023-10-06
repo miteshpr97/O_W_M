@@ -15,6 +15,7 @@ import TableCell from '@mui/material/TableCell';
 import TableBody from '@mui/material/TableBody';
 import TablePagination from '@mui/material/TablePagination';
 import EditDialog from './EditDialog';
+import DeleteConfirmationDialog from './DeleteConfirmationDialog';
 
 const CustomerDetails = () => {
   const [data, setData] = useState([]);
@@ -25,6 +26,7 @@ const CustomerDetails = () => {
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [selectedCustomerId, setSelectedCustomerId] = useState(null);
 
+  const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false); // Add state for delete confirmation dialog
 
 
 
@@ -46,19 +48,6 @@ const CustomerDetails = () => {
     setPageSize(parseInt(event.target.value, 10));
     setCurrentPage(1);
   };
-
-
-
-  // const handleChangePage = (event, newPage) => {
-  //   setPage(newPage);
-  // };
-
-
-  // const handlePageChange = (newPage) => {
-  //   setPage(newPage);
-  // };
-
-
 
 
 
@@ -89,48 +78,28 @@ const CustomerDetails = () => {
     setEditDialogOpen(false);
   };
 
-  // const handleDeleteClick = async (customerId) => {
-  //   // Display a confirmation dialog
-  //   const confirmed = window.confirm('Are you sure you want to delete this customer?');
 
-  //   if (!confirmed) {
-  //     // The user canceled the deletion
-  //     return;
-  //   }
 
-  //   try {
-  //     // Send a DELETE request to the API to delete the customer
-  //     const response = await axios.delete(`http://localhost:3306/api/customers/${customerId}`);
-  //     if (response.status === 200) {
-  //       // If the delete request is successful, remove the customer from the data state
-  //       const updatedData = data.filter((customer) => customer.customerCode !== customerId);
-  //       setData(updatedData);
-  //       // Optionally show a success message here
-  //       alert('Customer deleted successfully');
-  //       // Refresh the page
-  //       window.location.reload();
-  //     } else {
-  //       throw new Error('Network response was not ok');
-  //     }
-  //   } catch (error) {
-  //     console.error('Error deleting customer:', error);
-  //   }
-  // };
+  const handleDeleteClick = (customerId) => {
+    if (window.confirm('Are you sure you want to delete this item?')) {
+      deleteItem(customerId);
+    }
+  };
 
-  const handleDeleteClick = async (customerId) => {
+  
+  const deleteItem = async (customerId) =>{
     try {
-      const confirmed = window.confirm('Are you sure you want to delete this customer?');
-      if (!confirmed) return;
-
       const response = await axios.delete(`http://localhost:3306/api/customers/${customerId}`);
       if (response.status === 200) {
         // Remove the deleted customer from the data state
         const updatedData = data.filter((customer) => customer.customerCode !== customerId);
         setData(updatedData);
-        alert('Customer deleted successfully');
+        // alert('Customer deleted successfully');
       } else {
         console.error('Network response was not ok');
       }
+
+      window.location.reload();
     } catch (error) {
       console.error('Error deleting customer:', error);
     }
@@ -138,9 +107,23 @@ const CustomerDetails = () => {
 
 
 
+
+
+
+  const handleDeleteConfirmDialogOpen = (customerId) => {
+    setSelectedCustomerId(customerId);
+    setDeleteConfirmationOpen(true);
+  };
+
+  const handleDeleteConfirmDialogClose = () => {
+    setDeleteConfirmationOpen(false);
+  };
+
+
+
+
+
   return (
-
-
     <MainCard title="Customer Details" secondary={
       <Link to="/customer-jobs/" style={{ textDecoration: 'none' }}>
         <Button variant="contained" style={{ backgroundColor: '#15698c', color: 'white' }}>
@@ -193,18 +176,14 @@ const CustomerDetails = () => {
                   </TableCell>
 
                   <TableCell>
-                    <Button
-                      sx={{ backgroundColor: '#ff0000', color: 'white' }}
+                  <Button
                       variant="contained"
-                      onClick={() => handleDeleteClick(customer.customerCode)}
+                      style={{ backgroundColor: '#ff0000', color: 'white' }}
+                      onClick={() => handleDeleteConfirmDialogOpen(customer.customerCode)}
                     >
                       Delete
                     </Button>
                   </TableCell>
-
-
-
-
                 </TableRow>
               ))}
             </TableBody>
@@ -227,6 +206,19 @@ const CustomerDetails = () => {
         handleClose={handleCloseEditDialog}
         customerId={selectedCustomerId}
       />
+
+      <DeleteConfirmationDialog
+        open={deleteConfirmationOpen}
+        handleClose={handleDeleteConfirmDialogClose}
+        handleDelete={() => {
+          // Handle the delete action here and then close the dialog
+          handleDeleteClick(selectedCustomerId);
+          handleDeleteConfirmDialogClose();
+        }}
+      />
+
+
+
     </MainCard>
   );
 };

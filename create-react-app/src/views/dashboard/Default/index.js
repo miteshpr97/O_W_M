@@ -10,13 +10,13 @@
 //   const containerStyle = {
 //     display: 'flex',
 //     flex: 'wrap',
-  
+
 //     padding: '20px',
 //     width: '100vw',
 //     height: '100vh',
 //     backgroundColor: 'red',
 //   };
-  
+
 
 //   const coloredDivStyle = {
 //     height: '600px',
@@ -24,7 +24,7 @@
 //     // margin: '50px' // Corrected 'margintop' to 'margin'
 //     display: 'flex',
 //     justifyContent: 'center'
-   
+
 //   };
 
 
@@ -32,7 +32,7 @@
 //     height: '300px',
 //     width: '50%',
 //     // margin: '50px' // Corrected 'margintop' to 'margin'
-    
+
 //   };
 
 //   return (
@@ -50,7 +50,7 @@
 //           <Chart />
 //         </div>
 //         <div style={{ ...coloredDivStyleOne }}>
-//           <ColumnChart/>   
+//           <ColumnChart/>
 //         </div>
 //       </Box>
 //     </Grid>
@@ -80,15 +80,17 @@ const Dashboard = () => {
   };
 
   const coloredDivStyle = {
-    height: '450px',
-    width: isSmallScreen ? '100%' : '50%', // Use full width on small screens
+    height: '350px',
+    width: isSmallScreen ? '100%' : '65%', // Use full width on small screens
     display: 'flex',
     justifyContent: 'center',
   };
 
   const coloredDivStyleOne = {
     height: '300px',
-    width: isSmallScreen ? '100%' : '50%', // Use full width on small screens
+    width: isSmallScreen ? '100%' : '35%', // Use full width on small screens
+    
+
   };
 
   return (
@@ -103,10 +105,10 @@ const Dashboard = () => {
 
       <Box style={containerStyle}>
         <div style={{ ...coloredDivStyle }}>
-          <Chart />
+         <ColumnChart />
         </div>
         <div style={{ ...coloredDivStyleOne }}>
-          <ColumnChart />
+        <Chart />
         </div>
       </Box>
     </Grid>

@@ -75,8 +75,6 @@ const ViewJobs = () => {
   };
 
 
- 
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -105,6 +103,20 @@ const ViewJobs = () => {
     fetchData();
   }, []);
 
+ 
+
+  const handleEditClick = (jobId) => {
+    setEditDialogOpen(true);
+    setSelectedJobId(jobId);
+  };
+
+  const handleCloseEditDialog = () => {
+    setEditDialogOpen(false);
+  };
+
+
+
+  
   const handleDeleteClick = (jobId) => {
     if (window.confirm('Are you sure you want to delete this item?')) {
       deleteItem(jobId);
@@ -128,14 +140,7 @@ const ViewJobs = () => {
     }
   };
 
-  const handleEditClick = (jobId) => {
-    setEditDialogOpen(true);
-    setSelectedJobId(jobId);
-  };
 
-  const handleCloseEditDialog = () => {
-    setEditDialogOpen(false);
-  };
 
   const handleDeleteConfirmDialogOpen = (jobId) => {
     setSelectedJobId(jobId);
@@ -214,14 +219,14 @@ const ViewJobs = () => {
           </Table>
 
           <TablePagination
-        component="div"
-        count={data.length}
-        page={currentPage - 1}
-        onPageChange={handleChangePage}
-        rowsPerPage={pageSize}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-      <div>Total Pages: {totalPages}</div> {/* Display the total pages */}
+            component="div"
+            count={data.length}
+            page={currentPage - 1}
+            onPageChange={handleChangePage}
+            rowsPerPage={pageSize}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+          <div>Total Pages: {totalPages}</div> {/* Display the total pages */}
 
 
         </StyledTableContainer>
