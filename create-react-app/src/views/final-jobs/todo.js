@@ -18,7 +18,7 @@ const Todo = ({JobNo, handleSubmit}) => {
   const [manPowerFormData, setManPowerFormData] = useState([]);
   const [specialFormData, setSpecialFormData] = useState([]);
 
-
+  const REACT_APP_API_URL = process.env.REACT_APP_API_URL; 
 
   const handleLogisticsAccordionChange = () => {
     setLogisticsExpanded(!logisticsExpanded);
@@ -43,7 +43,7 @@ const Todo = ({JobNo, handleSubmit}) => {
 
     
       // Submit Logistics Data
-      const logisticsResponse = await fetch('http://localhost:3306/api/logistics', {
+      const logisticsResponse = await fetch(`${REACT_APP_API_URL}api/logistics`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ const Todo = ({JobNo, handleSubmit}) => {
       }
 
       // Submit MHE Data
-      const mheResponse = await fetch('http://localhost:3306/api/mhe', {
+      const mheResponse = await fetch(`${REACT_APP_API_URL}http://localhost:3306/api/mhe`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -75,7 +75,7 @@ const Todo = ({JobNo, handleSubmit}) => {
       }
 
       // Submit ManPower Data
-      const manPowerResponse = await fetch('http://localhost:3306/api/manPower', {
+      const manPowerResponse = await fetch(`${REACT_APP_API_URL}api/manPower`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ const Todo = ({JobNo, handleSubmit}) => {
       }
 
       // Submit Special Data
-      const specialResponse = await fetch('http://localhost:3306/api/special', {
+      const specialResponse = await fetch(`${REACT_APP_API_URL}api/special`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

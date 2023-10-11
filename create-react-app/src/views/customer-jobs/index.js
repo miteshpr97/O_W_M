@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, TextField, Button, Snackbar, Box, } from '@mui/material';
-
+import axios from 'axios';
 import MainCard from 'ui-component/cards/MainCard';
 import { Link } from 'react-router-dom';
 
@@ -21,6 +21,8 @@ const CustomerJobs = () => {
   const [error, setError] = useState('');
   const [openSuccessSnackbar, setOpenSuccessSnackbar] = useState(false);
   const [openErrorSnackbar, setOpenErrorSnackbar] = useState(false);
+  const REACT_APP_API_URL = process.env.REACT_APP_API_URL; 
+
 
   // const handleChange = (e) => {
   //   const { name, value } = e.target;
@@ -39,24 +41,58 @@ const CustomerJobs = () => {
   };
   
 
+  // useEffect(() => {
+  //   // Fetch the last customer code when the component mounts
+  //   const fetchLastCustomerCode = async () => {
+  //     try {
+  //       const response = await fetch(`${BASE_URL}api/customers/lastcustomercode`, {
+  //         method: 'GET',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //       });
+
+  //       if (response.ok) {
+  //         const data = await response.json();
+  //         console.log(data, "ciisnsn")
+  //         // Increment the last customer code by 1 and update the formData state
+  //         const nextCustomerCode = parseInt(data.customerCode, 10) + 1;
+
+  //         console.log(nextCustomerCode, "kdajjkc")
+  //         setFormData({
+  //           ...formData,
+  //           customerCode: nextCustomerCode.toString(),
+  //         });
+  //       } else {
+  //         console.error('Failed to fetch last customer code');
+  //       }
+  //     } catch (error) {
+  //       console.error('Error:', error);
+  //     }
+  //   };
+
+  //   // Call the fetchLastCustomerCode function when the component mounts
+  //   fetchLastCustomerCode();
+  // }, []);
+
+
   useEffect(() => {
     // Fetch the last customer code when the component mounts
     const fetchLastCustomerCode = async () => {
       try {
-        const response = await fetch('http://localhost:3306/api/customers/lastcustomercode', {
-          method: 'GET',
+        const response = await axios.get(`${REACT_APP_API_URL}api/customers/lastcustomercode`, {
           headers: {
             'Content-Type': 'application/json',
           },
         });
-
-        if (response.ok) {
-          const data = await response.json();
-          console.log(data, "ciisnsn")
+   
+        if (response.status === 200) {
+          const data = response.data;
+          console.log(data, "customer dataa");
           // Increment the last customer code by 1 and update the formData state
           const nextCustomerCode = parseInt(data.customerCode, 10) + 1;
-
-          console.log(nextCustomerCode, "kdajjkc")
+   
+          console.log(nextCustomerCode, "kdajjkc");
           setFormData({
             ...formData,
             customerCode: nextCustomerCode.toString(),
@@ -68,20 +104,17 @@ const CustomerJobs = () => {
         console.error('Error:', error);
       }
     };
-
+   
     // Call the fetchLastCustomerCode function when the component mounts
     fetchLastCustomerCode();
-  }, []);
-
-
-
+  }, [])
 
   
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:3306/api/customers', {
+      const response = await fetch(`${REACT_APP_API_URL}api/customers`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

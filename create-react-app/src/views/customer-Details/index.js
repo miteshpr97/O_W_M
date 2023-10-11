@@ -28,7 +28,7 @@ const CustomerDetails = () => {
 
   const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false); // Add state for delete confirmation dialog
 
-
+  const REACT_APP_API_URL = process.env.REACT_APP_API_URL; 
 
   const totalPages = Math.ceil(data.length / pageSize);
   const startIndex = (currentPage - 1) * pageSize;
@@ -54,7 +54,7 @@ const CustomerDetails = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3306/api/customers');
+        const response = await axios.get(`${REACT_APP_API_URL}api/customers`);
         if (response.status === 200) {
           setData(response.data);
         } else {
@@ -89,7 +89,7 @@ const CustomerDetails = () => {
   
   const deleteItem = async (customerId) =>{
     try {
-      const response = await axios.delete(`http://localhost:3306/api/customers/${customerId}`);
+      const response = await axios.delete(`${REACT_APP_API_URL}api/customers/${customerId}`);
       if (response.status === 200) {
         // Remove the deleted customer from the data state
         const updatedData = data.filter((customer) => customer.customerCode !== customerId);

@@ -145,13 +145,14 @@ function ColumnChart() {
   const [dataPlan, setDataPlan] = useState([]);
   const [dataClosed, setDataClosed] = useState([]);
   const [dataFinish, setDataFinish] = useState([]);
+  const REACT_APP_API_URL = process.env.REACT_APP_API_URL; 
 
   // Fetch data from the API when the component mounts
   useEffect(() => {
     async function fetchData() {
       try {
         // Fetch data for "New Jobs"
-        const responsePlan = await fetch('http://localhost:3306/api/new_jobs/plan/jobTransactions');
+        const responsePlan = await fetch(`${REACT_APP_API_URL}api/new_jobs/plan/jobTransactions`);
         if (!responsePlan.ok) {
           throw new Error('Failed to fetch data for New Jobs');
         }
@@ -159,7 +160,7 @@ function ColumnChart() {
         setDataPlan(dataPlan);
 
         // Fetch data for "Closed Jobs"
-        const responseClosed = await fetch('http://localhost:3306/api/new_jobs/closed/jobTransactions');
+        const responseClosed = await fetch(`${REACT_APP_API_URL}api/new_jobs/closed/jobTransactions`);
         if (!responseClosed.ok) {
           throw new Error('Failed to fetch data for Closed Jobs');
         }
@@ -167,7 +168,7 @@ function ColumnChart() {
         setDataClosed(dataClosed);
 
         // Fetch data for "Finish Jobs"
-        const responseFinish = await fetch('http://localhost:3306/api/new_jobs/finish/jobTransactions');
+        const responseFinish = await fetch(`${REACT_APP_API_URL}api/new_jobs/finish/jobTransactions`);
         if (!responseFinish.ok) {
           throw new Error('Failed to fetch data for Finish Jobs');
         }

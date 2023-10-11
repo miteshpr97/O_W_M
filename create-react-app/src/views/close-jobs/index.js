@@ -39,6 +39,8 @@ const CloseJobs = () => {
   const endIndex = startIndex + pageSize;
   const displayedData = data.slice(startIndex, endIndex);
 
+  const REACT_APP_API_URL = process.env.REACT_APP_API_URL; 
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -57,7 +59,7 @@ const CloseJobs = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:3306/api/new_jobs/jobStatusTwo');
+        const response = await fetch(`${REACT_APP_API_URL}api/new_jobs/jobStatusTwo`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -90,7 +92,7 @@ const CloseJobs = () => {
 
   const handleUpdated = async (jobNo, JobsClosingDate) => {
       try {
-        const response = await fetch(`http://localhost:3306/api/new_jobs/closed/${jobNo}`, {
+        const response = await fetch(`${REACT_APP_API_URL}api/new_jobs/closed/${jobNo}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -123,7 +125,7 @@ const CloseJobs = () => {
 
 
   return (
-    <MainCard title="Plan Jobs" secondary={
+    <MainCard title="Close Jobs" secondary={
       <Link to="/new-jobs/" style={{ textDecoration: 'none' }}>
         <Button variant="contained" style={{ backgroundColor: '#15698c', color: 'white' }}>
           New Jobs

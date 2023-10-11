@@ -55,7 +55,7 @@ const FinalJobs = () => {
   //   }));
   // };
 
-
+  const REACT_APP_API_URL = process.env.REACT_APP_API_URL; 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -81,7 +81,7 @@ const FinalJobs = () => {
   useEffect(() => {
     console.log('Component mounted');
     // Fetch customer data from the API using Axios or your preferred HTTP librar
-    axios.get(`http://localhost:3306/api/new_jobs/${JobNo}`)
+    axios.get(`${REACT_APP_API_URL}api/new_jobs/${JobNo}`)
       .then((response) => {
         console.log('API response:', response.data);
 
@@ -145,7 +145,7 @@ const FinalJobs = () => {
     // Show an alert with the message "Ready for plan"
     window.alert("Ready for plan");
 
-    axios.put(`http://localhost:3306/api/new_jobs/update/${JobNo}`, formData)
+    axios.put(`${REACT_APP_API_URL}api/new_jobs/update/${JobNo}`, formData)
       .then((response) => {
         console.log('Update API response:', response.data);
 

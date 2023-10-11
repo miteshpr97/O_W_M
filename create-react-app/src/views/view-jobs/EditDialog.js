@@ -33,6 +33,10 @@ const EditDialog = ({ open, handleClose, jobId }) => {
     LoadReturnDate: '',
   });
 
+  const REACT_APP_API_URL = process.env.REACT_APP_API_URL; 
+
+
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({
@@ -46,7 +50,7 @@ const EditDialog = ({ open, handleClose, jobId }) => {
 
     if (jobId) {
       axios
-        .get(`http://localhost:3306/api/new_jobs/${jobId}`)
+        .get(`${REACT_APP_API_URL}api/new_jobs/${jobId}`)
         .then((response) => {
           console.log('API response:', response.data);
 
@@ -90,7 +94,7 @@ const EditDialog = ({ open, handleClose, jobId }) => {
   
     // Send a PUT request to update the data
     axios
-      .put(`http://localhost:3306/api/new_jobs/${jobId}`, updatedData)
+      .put(`${REACT_APP_API_URL}api/new_jobs/${jobId}`, updatedData)
       .then((response) => {
         console.log('Data updated successfully:', response.data);
         // Show a success message (you can customize this)

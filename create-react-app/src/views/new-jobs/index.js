@@ -29,6 +29,7 @@ const NewJobs = () => {
   const [error, setError] = useState('');
   const [openSuccessSnackbar, setOpenSuccessSnackbar] = useState(false);
   const [openErrorSnackbar, setOpenErrorSnackbar] = useState(false);
+  const REACT_APP_API_URL = process.env.REACT_APP_API_URL; 
 
   const handleCustomerCodeChange = (e) => {
     const selectedCustomerCode = e.target.value;
@@ -39,7 +40,7 @@ const NewJobs = () => {
   useEffect(() => {
     async function fetchCustomerCodes() {
       try {
-        const response = await fetch('http://localhost:3306/api/customers');
+        const response = await fetch(`${REACT_APP_API_URL}api/customers`);
         if (response.ok) {
           const customersData = await response.json();
           const codesAndNames = customersData.map(customer => ({
@@ -60,7 +61,7 @@ const NewJobs = () => {
    
     const fetchLastJobNo = async () => {
       try {
-        const response = await fetch('http://localhost:3306/api/new_jobs/last-job-no', {
+        const response = await fetch(`${REACT_APP_API_URL}api/new_jobs/last-job-no`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -138,7 +139,7 @@ const NewJobs = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:3306/api/new_jobs', {
+      const response = await fetch(`${REACT_APP_API_URL}api/new_jobs`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),

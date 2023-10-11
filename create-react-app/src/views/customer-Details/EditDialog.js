@@ -27,6 +27,8 @@ const EditDialog = ({ open, handleClose, customerId }) => {
     contactPerson: '',
   });
 
+  const REACT_APP_API_URL = process.env.REACT_APP_API_URL; 
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({
@@ -38,7 +40,7 @@ const EditDialog = ({ open, handleClose, customerId }) => {
   useEffect(() => {
     if (customerId) {
       axios
-        .get(`http://localhost:3306/api/customers/${customerId}`)
+        .get(`${REACT_APP_API_URL}api/customers/${customerId}`)
         .then((response) => {
           setFormData(response.data);
         })
@@ -50,7 +52,7 @@ const EditDialog = ({ open, handleClose, customerId }) => {
 
   const handleSubmit = () => {
     axios
-      .put(`http://localhost:3306/api/customers/${customerId}`, formData)
+      .put(`${REACT_APP_API_URL}api/customers/${customerId}`, formData)
       .then((response) => {
         console.log('Data updated successfully:', response.data);
         alert('Data updated successfully');

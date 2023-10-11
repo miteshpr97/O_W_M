@@ -36,6 +36,9 @@ const FinishJobs = () => {
   const endIndex = startIndex + pageSize;
   const displayedData = data.slice(startIndex, endIndex);
 
+  const REACT_APP_API_URL = process.env.REACT_APP_API_URL; 
+
+  
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -51,7 +54,7 @@ const FinishJobs = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:3306/api/new_jobs/jobStatusThree');
+        const response = await fetch(`${REACT_APP_API_URL}api/new_jobs/jobStatusThree`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }

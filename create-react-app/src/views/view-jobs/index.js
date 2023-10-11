@@ -52,6 +52,7 @@ const ViewJobs = () => {
   const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false); // Add state for delete confirmation dialog
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10); // Initialize page size
+  const REACT_APP_API_URL = process.env.REACT_APP_API_URL; 
 
   const totalPages = Math.ceil(data.length / pageSize);
   const startIndex = (currentPage - 1) * pageSize;
@@ -78,7 +79,7 @@ const ViewJobs = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:3306/api/new_jobs/jobStatusOne');
+        const response = await fetch(`${REACT_APP_API_URL }api/new_jobs/jobStatusOne`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -125,7 +126,7 @@ const ViewJobs = () => {
 
   const deleteItem = async (jobId) => {
     try {
-      const response = await fetch(`http://localhost:3306/api/new_jobs/${jobId}`, {
+      const response = await fetch(`${REACT_APP_API_URL }api/new_jobs/${jobId}`, {
         method: 'DELETE',
       });
       if (!response.ok) {

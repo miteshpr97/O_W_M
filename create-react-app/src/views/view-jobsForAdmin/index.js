@@ -27,6 +27,7 @@ const ViewJobsForAdmin = () => {
   const [value, setValue] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10); // Initialize page size
+  const REACT_APP_API_URL = process.env.REACT_APP_API_URL; 
 
   const totalPages = Math.ceil(data.length / pageSize);
   const startIndex = (currentPage - 1) * pageSize;
@@ -49,7 +50,7 @@ const ViewJobsForAdmin = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:3306/api/new_jobs/jobStatusOne');
+        const response = await fetch(`${REACT_APP_API_URL}api/new_jobs/jobStatusOne`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }

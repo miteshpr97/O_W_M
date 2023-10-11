@@ -85,10 +85,12 @@ import { PieChart, Pie, Cell, Legend, Tooltip } from 'recharts';
 function Chart() {
   const [dataPlan, setDataPlan] = useState([]);
 
+  const REACT_APP_API_URL = process.env.REACT_APP_API_URL; 
+
   useEffect(() => {
     async function fetchData() {
       try {
-        const responsePlan = await fetch('http://localhost:3306/api/new_jobs/plan/jobTransactions');
+        const responsePlan = await fetch(`${REACT_APP_API_URL}api/new_jobs/plan/jobTransactions`);
         if (!responsePlan.ok) {
           throw new Error('Failed to fetch data for New Jobs');
         }

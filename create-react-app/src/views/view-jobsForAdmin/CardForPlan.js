@@ -58,10 +58,11 @@ const CardForPlan = () => {
   const [insideToOutsideCount, setInsideToOutsideCount] = useState(0);
   const [outsideToInsideCount, setOutsideToInsideCount] = useState(0);
   const [outsideToOutsideCount, setOutsideToOutsideCount] = useState(0);
+  const REACT_APP_API_URL = process.env.REACT_APP_API_URL; 
 
   useEffect(() => {
     // Fetch Inside To Inside count
-    axios.get('http://localhost:3306/api/new_jobs/plan/insidetoinside')
+    axios.get(`${REACT_APP_API_URL}api/new_jobs/plan/insidetoinside`)
       .then(response => {
         setInsideToInsideCount(response.data.count);
       })
@@ -70,7 +71,7 @@ const CardForPlan = () => {
       });
 
     // Fetch Inside To Outside count
-    axios.get('http://localhost:3306/api/new_jobs/plan/insidetoutside')
+    axios.get(`{REACT_APP_API_URL}api/new_jobs/plan/insidetoutside`)
       .then(response => {
         setInsideToOutsideCount(response.data.count);
       })
@@ -79,7 +80,7 @@ const CardForPlan = () => {
       });
 
     // Fetch Outside To Inside count
-    axios.get('http://localhost:3306/api/new_jobs/plan/outsidetoinside')
+    axios.get(`${REACT_APP_API_URL}api/new_jobs/plan/outsidetoinside`)
       .then(response => {
         setOutsideToInsideCount(response.data.count);
       })
@@ -88,7 +89,7 @@ const CardForPlan = () => {
       });
 
     // Fetch Outside To Outside count
-    axios.get('http://localhost:3306/api/new_jobs/plan/outsideToutside')
+    axios.get(`${REACT_APP_API_URL}api/new_jobs/plan/outsideToutside`)
       .then(response => {
         setOutsideToOutsideCount(response.data.count);
       })
