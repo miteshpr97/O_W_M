@@ -155,6 +155,8 @@ const CustomerDetails = () => {
                 <TableCell>Phone Number</TableCell>
                 <TableCell>Contact Person</TableCell>
                 <TableCell>Edit</TableCell>
+                <TableCell>Delete</TableCell>
+                
               </TableRow>
             </TableHead>
             <TableBody>

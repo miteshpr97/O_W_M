@@ -29,7 +29,7 @@ const FinishJobs = () => {
   const [data, setData] = useState([]);
   const [value, setValue] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10); // Initialize page size
+  const [pageSize, setPageSize] = useState(5); // Initialize page size
 
   const totalPages = Math.ceil(data.length / pageSize);
   const startIndex = (currentPage - 1) * pageSize;

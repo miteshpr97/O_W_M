@@ -184,7 +184,8 @@ const ViewJobs = () => {
                 <TableCell className='small-text'>Job Summary</TableCell>
                 <TableCell className='small-text'>Pick Up Lock</TableCell>
                 <TableCell className='small-text'>Delivery Lock</TableCell>
-                <TableCell className='small-text'>Plan Job</TableCell>
+                <TableCell className='small-text'>Edit Jobs</TableCell>
+                <TableCell className='small-text'>Delete Jobs</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

@@ -134,6 +134,10 @@
 
 
 
+
+
+
+
 import React, { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
@@ -190,18 +194,22 @@ function ColumnChart() {
 
   return (
     <div 
-    style={{ 
-      width: '630px', 
-      padding: '20px',
-       border: '1px solid #ccc', 
-       backgroundColor: '#fffcfc', 
-       boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)', // Add shadow 
-       }}>
+      style={{ 
+        width: '630px', 
+        padding: '20px',
+        border: '1px solid #ccc', 
+        backgroundColor: '#fffcfc', 
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+      }}
+    >
       <ResponsiveContainer width="100%" height={350}>
         <BarChart data={chartData} margin={{ top: 20, right: 30, left: -20, bottom: 50 }}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="category" />
-          <YAxis />
+          <YAxis
+            domain={[0, 'auto']} // Set the minimum value to 0 and 'auto' for the maximum (automatically calculated)
+            ticks={[0, 1, 2, 3, 4]}   // Define custom tick values
+          />
           <Tooltip />
           <Legend />
           <Bar dataKey="New Jobs" fill="blue" />
@@ -214,9 +222,6 @@ function ColumnChart() {
 }
 
 export default ColumnChart;
-
-
-
 
 
 
