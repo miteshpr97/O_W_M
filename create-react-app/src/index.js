@@ -11,7 +11,7 @@ import { store } from 'store';
 
 // style + assets
 import 'assets/scss/style.scss';
-import config from './config';
+// import config from './config';
 
 // ==============================|| REACT DOM RENDER  ||============================== //
 
@@ -19,7 +19,7 @@ const container = document.getElementById('root');
 const root = createRoot(container); // createRoot(container!) if you use TypeScript
 root.render(
   <Provider store={store}>
-    <BrowserRouter basename={config.basename}>
+    <BrowserRouter basename='/'>        
       <App />
     </BrowserRouter>
   </Provider>
@@ -29,3 +29,7 @@ root.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
+
+
+//{config.basename}
