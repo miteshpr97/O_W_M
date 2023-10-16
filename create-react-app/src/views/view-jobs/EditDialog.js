@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Dialog from '@mui/material/Dialog';
-import DialogContent from '@mui/material/DialogContent';
-import DialogActions from '@mui/material/DialogActions';
-import Button from '@mui/material/Button';
+import { Dialog, DialogContent, DialogActions, Button } from '@mui/material';
+
 import {
-  
   FormControl,
   Select,
   MenuItem,

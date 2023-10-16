@@ -1,19 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Container from '@mui/material/Container';
 import MainCard from 'ui-component/cards/MainCard';
-import Button from '@mui/material/Button';
-import Table from '@mui/material/Table';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import TableCell from '@mui/material/TableCell';
-import TableBody from '@mui/material/TableBody';
-import TablePagination from '@mui/material/TablePagination';
-
-
-import IconButton from '@mui/material/IconButton';
+import {Tabs, Tab, Container, Button, Table, TableHead, TableRow, TableCell, TableBody, TablePagination, IconButton} from '@mui/material'
 import CardForFinish from './CardForFinish';
 
 const formatDateToDDMMYYYY = (dateString) => {

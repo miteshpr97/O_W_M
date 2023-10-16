@@ -161,14 +161,11 @@ const Todo = ({JobNo, handleSubmit}) => {
           marginTop: "5px",
           padding: '10px 20px',
           fontSize: '18px',
-          cursor: 'pointer',
-          
+          cursor: 'pointer',    
         }}>
           Submit  Data
         </button>
       </div>
-      
-
     </div>
   );
 };

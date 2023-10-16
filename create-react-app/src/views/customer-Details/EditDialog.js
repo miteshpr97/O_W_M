@@ -1,16 +1,7 @@
 
-// EditDialog.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Dialog from '@mui/material/Dialog';
-
-import DialogContent from '@mui/material/DialogContent';
-import DialogActions from '@mui/material/DialogActions';
-import Button from '@mui/material/Button';
-import { 
-  Grid,
-  TextField,
-} from '@mui/material';
+import { Dialog, DialogContent, DialogActions, Button, Grid, TextField } from '@mui/material';
 import MainCard from 'ui-component/cards/MainCard';
 
 const EditDialog = ({ open, handleClose, customerId }) => {
@@ -27,39 +18,27 @@ const EditDialog = ({ open, handleClose, customerId }) => {
     contactPerson: '',
   });
 
-  const REACT_APP_API_URL = process.env.REACT_APP_API_URL; 
+  const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   useEffect(() => {
     if (customerId) {
-      axios
-        .get(`${REACT_APP_API_URL}api/customers/${customerId}`)
-        .then((response) => {
-          setFormData(response.data);
-        })
-        .catch((error) => {
-          console.error('Error fetching customer data:', error);
-        });
+      axios.get(`${REACT_APP_API_URL}api/customers/${customerId}`)
+        .then((response) => setFormData(response.data))
+        .catch((error) => console.error('Error fetching customer data:', error));
     }
   }, [customerId]);
 
   const handleSubmit = () => {
-    axios
-      .put(`${REACT_APP_API_URL}api/customers/${customerId}`, formData)
+    axios.put(`${REACT_APP_API_URL}api/customers/${customerId}`, formData)
       .then((response) => {
         console.log('Data updated successfully:', response.data);
         alert('Data updated successfully');
-    
-            // Refresh the page
-             location.reload();
-
+        location.reload();
         handleClose();
       })
       .catch((error) => {
@@ -71,7 +50,7 @@ const EditDialog = ({ open, handleClose, customerId }) => {
   return (
     <Dialog open={open} onClose={handleClose}>
       <DialogContent>
-        <MainCard title=" Edit Customer Details">
+      <MainCard title=" Edit Customer Details">
         <Grid container spacing={2}>
             <Grid item xs={6}>
               <TextField
@@ -192,18 +171,11 @@ const EditDialog = ({ open, handleClose, customerId }) => {
         </MainCard>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="primary">
-          Cancel
-        </Button>
-        <Button onClick={handleSubmit} color="primary">
-          Save
-        </Button>
+        <Button onClick={handleClose} color="primary">Cancel</Button>
+        <Button onClick={handleSubmit} color="primary">Save</Button>
       </DialogActions>
     </Dialog>
   );
 };
 
 export default EditDialog;
-
-
-

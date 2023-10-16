@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-import Button from '@mui/material/Button';
 import {
   Box,
   Typography,
@@ -15,6 +14,7 @@ import {
   InputLabel,
   Tab,
   Tabs,
+  Button 
   
 } from '@mui/material';
 
@@ -111,31 +111,6 @@ const FinalJobs = () => {
 
 
 
-
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   console.log("Form submitted with data:", formData);
-
-  //   // Show an alert with the message "Ready for plan"
-  //   window.alert("Ready for plan");
-
-  //   axios.put(`http://localhost:3306/api/new_jobs/update/${JobNo}`, formData)
-  //     .then((response) => {
-  //       console.log('Update API response:', response.data);
-        
-  //       // Show an alert with the message "Submission successful"
-  //       window.alert("Submission successful");
-        
-  //       // Navigate to another page (e.g., job list) after a successful submission
-  //       history.push('/job-list');
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error updating data:', error);
-
-  //       // Show an alert with the message "Submission failed"
-  //       window.alert("Submission failed");
-  //     });
-  // };
 
 
   const handleSubmit = () => {

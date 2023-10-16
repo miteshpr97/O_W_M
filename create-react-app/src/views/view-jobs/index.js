@@ -1,23 +1,13 @@
 
 import React, { useState, useEffect } from 'react';
-import Box from '@mui/material/Box';
 import { Link } from 'react-router-dom';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Container from '@mui/material/Container';
 import MainCard from 'ui-component/cards/MainCard';
-import Button from '@mui/material/Button';
-import Table from '@mui/material/Table';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import TableCell from '@mui/material/TableCell';
-import TableBody from '@mui/material/TableBody';
+import { Box, Tabs, Tab, Container, Button, Table, TableHead, TableRow, TableCell, TableBody, TableContainer, Paper, styled, TablePagination } from '@mui/material';
 import EditDialog from './EditDialog';
-import TablePagination from '@mui/material/TablePagination';
-import { TableContainer, Paper, styled } from '@mui/material';
-
-// Import the DeleteConfirmationDialog component
 import DeleteConfirmationDialog from './DeleteConfirmationDialog';
+
+
+
 
 const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
   [theme.breakpoints.down('sm')]: {
@@ -28,6 +18,7 @@ const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
     },
   },
 }));
+
 
 const ResponsiveBox = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down('sm')]: {
@@ -52,14 +43,14 @@ const ViewJobs = () => {
   const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false); // Add state for delete confirmation dialog
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10); // Initialize page size
-  const REACT_APP_API_URL = process.env.REACT_APP_API_URL; 
+
 
   const totalPages = Math.ceil(data.length / pageSize);
   const startIndex = (currentPage - 1) * pageSize;
   const endIndex = startIndex + pageSize;
   const displayedData = data.slice(startIndex, endIndex);
 
-
+  const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -79,7 +70,7 @@ const ViewJobs = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${REACT_APP_API_URL }api/new_jobs/jobStatusOne`);
+        const response = await fetch(`${REACT_APP_API_URL}api/new_jobs/jobStatusOne`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -104,7 +95,7 @@ const ViewJobs = () => {
     fetchData();
   }, []);
 
- 
+
 
   const handleEditClick = (jobId) => {
     setEditDialogOpen(true);
@@ -117,7 +108,7 @@ const ViewJobs = () => {
 
 
 
-  
+
   const handleDeleteClick = (jobId) => {
     if (window.confirm('Are you sure you want to delete this item?')) {
       deleteItem(jobId);
@@ -126,7 +117,7 @@ const ViewJobs = () => {
 
   const deleteItem = async (jobId) => {
     try {
-      const response = await fetch(`${REACT_APP_API_URL }api/new_jobs/${jobId}`, {
+      const response = await fetch(`${REACT_APP_API_URL}api/new_jobs/${jobId}`, {
         method: 'DELETE',
       });
       if (!response.ok) {
