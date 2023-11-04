@@ -3,6 +3,9 @@ import { Grid, TextField, Button, Snackbar, Box, } from '@mui/material';
 import axios from 'axios';
 import MainCard from 'ui-component/cards/MainCard';
 import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+
+
 
 const CustomerJobs = () => {
   const [formData, setFormData] = useState({
@@ -21,7 +24,7 @@ const CustomerJobs = () => {
   const [error, setError] = useState('');
   const [openSuccessSnackbar, setOpenSuccessSnackbar] = useState(false);
   const [openErrorSnackbar, setOpenErrorSnackbar] = useState(false);
-  const REACT_APP_API_URL = process.env.REACT_APP_API_URL; 
+  const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
 
   // const handleChange = (e) => {
@@ -39,7 +42,7 @@ const CustomerJobs = () => {
       setFormData({ ...formData, [name]: value });
     }
   };
-  
+
 
   // useEffect(() => {
   //   // Fetch the last customer code when the component mounts
@@ -73,9 +76,8 @@ const CustomerJobs = () => {
 
   //   // Call the fetchLastCustomerCode function when the component mounts
   //   fetchLastCustomerCode();
-  // }, []);
-
-
+  // }, [])
+  
   useEffect(() => {
     // Fetch the last customer code when the component mounts
     const fetchLastCustomerCode = async () => {
@@ -85,13 +87,13 @@ const CustomerJobs = () => {
             'Content-Type': 'application/json',
           },
         });
-   
+
         if (response.status === 200) {
           const data = response.data;
           console.log(data, "customer dataa");
           // Increment the last customer code by 1 and update the formData state
           const nextCustomerCode = parseInt(data.customerCode, 10) + 1;
-   
+
           console.log(nextCustomerCode, "kdajjkc");
           setFormData({
             ...formData,
@@ -104,12 +106,12 @@ const CustomerJobs = () => {
         console.error('Error:', error);
       }
     };
-   
+
     // Call the fetchLastCustomerCode function when the component mounts
     fetchLastCustomerCode();
   }, [])
 
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -164,14 +166,14 @@ const CustomerJobs = () => {
 
 
 
-  
+
   const handleErrorSnackbarClose = () => {
     setOpenErrorSnackbar(false);
   };
 
 
   return (
-    <MainCard title=" New Customer">    
+    <MainCard title=" New Customer">
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={6}>
@@ -182,7 +184,7 @@ const CustomerJobs = () => {
               name="customerCode"
               value={formData.customerCode}
               onChange={handleChange}
-              required   
+              required
             />
           </Grid>
           <Grid item xs={6}>
@@ -249,7 +251,7 @@ const CustomerJobs = () => {
               name="phone2"
               value={formData.phone2}
               onChange={handleChange}
-             
+
             />
           </Grid>
           <Grid item xs={6}>
@@ -272,7 +274,7 @@ const CustomerJobs = () => {
               name="website"
               value={formData.website}
               onChange={handleChange}
-              
+
             />
           </Grid>
           <Grid item xs={12}>
@@ -290,13 +292,52 @@ const CustomerJobs = () => {
 
             <Box display="flex" justifyContent="space-between" padding={2}>
 
-              <Link to="/customer-Details/"> <Button
-                type="submit"
-                variant="contained"
-                style={{ backgroundColor: "#15698c", color: "white" }} // Set background color and text color
-              >
-                View Customer
-              </Button></Link>
+              <NavLink to="/customer-Details/" activeClassName="active-link">
+                <Button
+                  type="submit"
+                  variant="contained"
+                  style={{ backgroundColor: "#15698c", color: "white" }} // Set background color and text color
+                >
+                  View Customer
+                </Button>
+              </NavLink>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+              <Link to="/customer-Details/">
+                <Button
+                  type="submit"
+                  variant="contained"
+                  style={{ backgroundColor: "#15698c", color: "white" }} // Set background color and text color
+                >
+                  View Customer
+                </Button>
+
+              </Link> 
+
+
+
+
+
+
+
+
+
               <Button
                 type="submit"
                 variant="contained"

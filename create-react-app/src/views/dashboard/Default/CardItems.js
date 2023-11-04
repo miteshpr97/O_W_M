@@ -88,7 +88,7 @@ const Carditems = () => {
       });
 
     // Fetch Outside To Outside count
-    axios.get(`${REACT_APP_API_URL}api/new_jobs/plan/outsideToutsid`)
+    axios.get(`${REACT_APP_API_URL}api/new_jobs/plan/outsideToutside`)
       .then(response => {
         setOutsideToOutsideCount(response.data.count);
       })
